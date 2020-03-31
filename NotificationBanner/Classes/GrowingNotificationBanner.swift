@@ -19,6 +19,7 @@
 import UIKit
 import SnapKit
 
+@objcMembers
 open class GrowingNotificationBanner: BaseNotificationBanner {
     
     public enum IconPosition {
