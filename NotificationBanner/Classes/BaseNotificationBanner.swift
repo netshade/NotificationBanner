@@ -107,7 +107,7 @@ open class BaseNotificationBanner: UIView {
     public var dismissOnSwipeUp: Bool = true
 
     /// Closure that will be executed if the notification banner is tapped
-    public var onTap: (() -> Void)?
+    public var onTap: ((UIView?) -> Void)?
 
     /// Closure that will be executed if the notification banner is swiped up
     public var onSwipeUp: (() -> Void)?
@@ -532,12 +532,13 @@ open class BaseNotificationBanner: UIView {
     /**
         Called when a notification banner is tapped
     */
-    @objc private dynamic func onTapGestureRecognizer() {
+    @objc private dynamic func onTapGestureRecognizer(gestureRecognizer: UITapGestureRecognizer) {
         if dismissOnTap {
             dismiss()
         }
-
-        onTap?()
+        
+        let tapPoint = gestureRecognizer.location(in: self);
+        onTap?(hitTest(tapPoint, with: nil))
     }
 
     /**
